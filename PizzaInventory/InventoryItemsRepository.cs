@@ -16,6 +16,12 @@ namespace PizzaInventory
             _conn = conn;
         }
 
+        public void CountInventory(InventoryItems inventoryItem)
+        {
+            _conn.Execute("UPDATE INVENTORY_ITEMS SET AMTONHAND = @amtOnHand WHERE INVENTORYID = @id;", 
+                new { amtOnHand = inventoryItem.AmtOnHand, id = inventoryItem.InventoryID });
+        }
+
         public IEnumerable<InventoryItems> GetAllInventoryItems()
         {
             // This is the implementation of the method in our irepository interface
@@ -23,7 +29,16 @@ namespace PizzaInventory
             // a collection of InventoryItems - IEnumerable<InventoryItems>
             // Dapper is an object-relational mappping (ORM) product that allows us to use SQL language
             // in our C# code to query the database.
-            return _conn.Query<InventoryItems>("SELECT * FROM INVENTORY_ITEMS");
+            return _conn.Query<InventoryItems>
+                ("SELECT * FROM INVENTORY_ITEMS");
+        }
+
+        public InventoryItems GetInventoryItem(int id)
+        {
+            // This is the implementation of the method in our irepository interface
+            // This QuerySingle Dapper method returns a single row
+            return _conn.QuerySingle<InventoryItems>
+                ("SELECT * FROM INVENTORY_ITEMS WHERE INVENTORYID = @id", new { id = id });
         }
     }
 }

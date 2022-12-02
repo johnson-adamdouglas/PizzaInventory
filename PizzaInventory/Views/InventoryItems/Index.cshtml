@@ -9,7 +9,7 @@
      items model. Then we use a foreach loop to create rows for each inventory item
 -->
 <h2>Inventory Items</h2>
-<table class="table">
+<table class="table table-bordered table-striped table-sm table-hover">
     <tr>
         <th>Inventory ID</th>
         <th>Name</th>
@@ -22,8 +22,8 @@
     {
         <tr>
             <td>@item.InventoryID</td>
-            <td>@item.Name</td>
-            <td>@item.Price</td>
+            <td><a href=/InventoryItems/ViewInventoryItem/@item.InventoryID>@item.Name</a></td> <!--embeds link to ViewInventoryItem in Name-->
+            <td>$@item.Price</td>
             <td>@item.Inventory_TypeID</td>
             <td>@item.AmtOnHand</td>
         </tr>

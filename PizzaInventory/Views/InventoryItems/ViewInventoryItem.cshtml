@@ -1,0 +1,37 @@
+﻿<!-- This is a Razor View file (.cshtml) that allows us to use C# code with html code using the at symbol -->
+
+<!-- This represents the data model that we will eventually pass to our view stored in variable "at model" -->
+@model InventoryItems
+
+<h3>@Model.Name Information</h3>
+
+<table class="table">
+    <tr>
+        <th>Inventory ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Inventory Type</th>
+        <th>Count Unit</th>
+        <th>Order Unit</th>
+        <th>Count Unit per Order Unit</th>
+        <th>Amount on Hand</th>
+        <th>Starting Amount</th>
+        <th>Quantity Delivered</th>
+        <th>Ending Amount</th>
+        <th>Amount Used</th>
+    </tr>
+    <tr>
+        <td>@Model.InventoryID</td>
+        <td>@Model.Name</td>
+        <td>$@Model.Price</td>
+        <td>@Model.Inventory_TypeID</td>
+        <td>@Model.CountUnit</td>
+        <td>@Model.OrderUnit</td>
+        <td>@Model.CountUnitPerOrderUnit</td>
+        <td>@Model.AmtOnHand</td>
+        <td>@Model.StartingAmt</td>
+        <td>@Model.QuantityDelivered</td>
+        <td>@Model.EndingAmt</td>
+        <td>@Model.AmtUsed</td>
+    </tr>
+</table>

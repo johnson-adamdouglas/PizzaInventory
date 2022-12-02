@@ -1,0 +1,38 @@
+﻿
+@model IEnumerable<InventoryItems>
+
+
+
+<h2>Countsheet</h2>
+
+
+    <table class="table table-bordered table-striped table-sm table-hover">
+        <tr>
+            <th>Name</th>
+            <th>Amount On Hand</th>
+            <th>Enter Your Count Here:</th>
+        </tr>
+
+        @{
+            var count = 0;
+        }
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td>@item.Name</td> 
+                <td>@item.AmtOnHand</td>
+                <td>@using (Html.BeginForm("UpdateInventoryItemToDatabase", "InventoryItems", "Post"))
+                {
+                    <input name="InventoryID" type="hidden" value="@item.InventoryID" />
+                    <input type="number" step="0.01" name="AmtOnHand" class="form-control" value="@item.AmtOnHand" />
+                    <input type="submit" value="Update Inventory" class="btn btn-primary" />
+                }
+                </td>   
+            </tr>
+
+            count++;
+        }
+    
+
+    </table>
+
