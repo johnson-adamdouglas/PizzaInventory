@@ -30,22 +30,23 @@ namespace PizzaInventory.Controllers
             return View(inventoryItem);
         }
 
-        public IActionResult CountInventory()
+        public IActionResult CountInventory() 
         {
             var inventoryItems = repo.GetAllInventoryItems();
             return View(inventoryItems);
         }
 
-        public IActionResult UpdateInventoryItemToDatabase(InventoryItems inventoryItem)
+        public IActionResult BulkUpdateInventoryItems(IEnumerable<InventoryItems> inventoryItems)
         {
-            repo.CountInventory(inventoryItem);
+            repo.BulkCountInventory(inventoryItems);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("CountInventory");
         }
 
-        //public IActionResult BulkUpdateInventoryItems(IEnumerable<InventoryItems> inventoryItems)
+        //public IActionResult FoodOrder(IEnumerable<InventoryItems> inventoryItems)
         //{
-
+        //    repo.FoodOrder(inventoryItems);
+        //    return View(inventoryItems);
         //}
     }
 }

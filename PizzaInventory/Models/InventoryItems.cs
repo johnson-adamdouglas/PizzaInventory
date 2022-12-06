@@ -14,14 +14,23 @@ namespace PizzaInventory.Models
         public double Price { get; set; }
         public int Inventory_TypeID { get; set; }
         public string CountUnit { get; set; }
+        public double CountUnitQuantity { get; set; }
         public string OrderUnit { get; set; }
-        public int CountUnitPerOrderUnit { get; set; }
-        public int AmtOnHand { get; set; }
-        public int StartingAmt { get; set; }
-        public int QuantityDelivered { get; set; }
-        public int BeginningAmt { get; set; }
-        public int EndingAmt { get; set; }
-        public int AmtUsed { get; set; }
+        public double OrderUnitQuantity { get; set; }
+        public double CountUnitPerOrderUnit { get; set; }
+        public double AmtOnHand { get; set; }
+        public double StartingAmt { get; set; }
+        public double QuantityDelivered { get; set; }
+        public double BeginningAmt { get; set; }
+        public double EndingAmt { get; set; }
+        public double AmtUsed { get; set; }
+        public int Order { get; set; }
+        public int SuggestedOrder { get; set; }
+        public double Yield { get; set; }
+        
+        public double margin { get; set; }
+
         #endregion
+
     }
 }

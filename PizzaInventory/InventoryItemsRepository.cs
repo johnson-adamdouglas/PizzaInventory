@@ -16,10 +16,32 @@ namespace PizzaInventory
             _conn = conn;
         }
 
-        public void CountInventory(InventoryItems inventoryItem)
+        public void BulkCountInventory(IEnumerable<InventoryItems> inventoryItem)
         {
-            _conn.Execute("UPDATE INVENTORY_ITEMS SET AMTONHAND = @amtOnHand WHERE INVENTORYID = @id;", 
-                new { amtOnHand = inventoryItem.AmtOnHand, id = inventoryItem.InventoryID });
+            foreach (var item in inventoryItem)
+            {
+                item.AmtOnHand = item.OrderUnitQuantity * GetCountUnitPerOrderUnit(item.InventoryID) + item.CountUnitQuantity;
+                _conn.Execute("UPDATE INVENTORY_ITEMS SET AMTONHAND = @amtOnHand WHERE INVENTORYID = @id;",
+                    new { amtOnHand = item.AmtOnHand, id = item.InventoryID });
+            }
+        }
+
+        public void FoodOrder(IEnumerable<InventoryItems> inventoryItems)
+        {
+            Random rnd = new Random();
+            int orderID = rnd.Next(1000, 9999);
+            _conn.Execute("CREATE TABLE orderID = @orderID (" +
+                "InventoryID int NOT NULL," +
+                "Name string," +
+                "AmtOnHand double," +
+                "Margin double," +
+                "SuggestedOrder int," +
+                "Order int," +
+                "FOREIGN KEY (InventoryID) REFERENCES INVENTORY_ITEMS (InventoryID)");
+            //foreach (var item in inventoryItems)
+            //{
+            //    _conn.Execute
+            //}
         }
 
         public IEnumerable<InventoryItems> GetAllInventoryItems()
@@ -31,6 +53,12 @@ namespace PizzaInventory
             // in our C# code to query the database.
             return _conn.Query<InventoryItems>
                 ("SELECT * FROM INVENTORY_ITEMS");
+        }
+
+        public double GetCountUnitPerOrderUnit(int id)
+        {
+            return _conn.QuerySingle<double>
+                ("SELECT COUNTUNITPERORDERUNIT FROM INVENTORY_ITEMS WHERE INVENTORYID = @id", new {id = id });
         }
 
         public InventoryItems GetInventoryItem(int id)

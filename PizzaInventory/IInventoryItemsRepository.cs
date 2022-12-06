@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using PizzaInventory.Models;
 
 namespace PizzaInventory
@@ -10,7 +11,11 @@ namespace PizzaInventory
 
         public InventoryItems GetInventoryItem(int id);//Stubbed out method to be implemented in the repository
 
-        public void CountInventory(InventoryItems inventoryItem);
+        public void BulkCountInventory(IEnumerable<InventoryItems> inventoryItems);
+
+        public double GetCountUnitPerOrderUnit(int id);
+
+        //public void FoodOrder(IEnumerable<InventoryItems> inventoryItems);
     }
 
 
